@@ -14,3 +14,6 @@
  *= require_tree .
  *= require_self
  */
+ .stock-search-results {
+   font-size: 1.2em;
+ }

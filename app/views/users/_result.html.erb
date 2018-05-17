@@ -1,0 +1,7 @@
+<% if @stock %>
+  <div class="stock-search-results">
+    <span><strong>Name: </strong><%= @stock.name %></span>
+    <span><strong>Ticker: </strong><%= @stock.ticker %><span>
+    <span><strong>Last Price: </strong><%= "$#{@stock.last_price}" %></span>
+  </div>
+<% end %>
