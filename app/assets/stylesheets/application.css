@@ -17,3 +17,31 @@
  .stock-search-results {
    font-size: 1.2em;
  }
+
+ .align-right {
+   float:right;
+ }
+
+ .stock-name {
+   text-align: center;
+   font-weight: 600;
+   color: darkslategray;
+   font-size: 1.4em;
+   margin: 5px;
+ }
+
+ .stock-symbol {
+  text-align: center;
+  font-weight: 400;
+  color: slategray;
+  font-size: 1.2em;
+  margin: 5px;
+}
+
+.stock-price {
+  text-align: center;
+  font-weight: 300;
+  color: darkslategray;
+  font-size: 1.3em;
+  margin: 5px;
+}

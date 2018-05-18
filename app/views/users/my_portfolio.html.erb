@@ -1,7 +1,5 @@
-<h1>My Portfolio</h1>
-
 <h3>Search for Stock</h3>
-<div class="stock-lookup well col-md-12">
+<div class="stock-lookup well col-md-12" style="padding-bottom: 2px">
   <%= form_with url: search_stocks_path, id:"stock-lookup", method: :get, remote: true do |f| %>
     <div class="form-group row no-padding text-center">
       <div class="col-md-10">
@@ -13,6 +11,9 @@
     </div>
   <% end %>
   <div id = "results">
-    <% render 'result' %>
+    <%= render 'users/result' %>
   </div>
+</div>
+<div id="stocks-index">
+  <%= render 'users/stocks_index.html'%>
 </div>

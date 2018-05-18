@@ -1,10 +1,19 @@
 <div>
-  <%= bootstrap_flash %>
+  <% if params[:controller] == "stocks" %>
+    <%= bootstrap_flash %>
+  <% end %>
 </div>
 <% if @stock %>
-  <div class="stock-search-results">
-    <span><strong>Name: </strong><%= @stock.name %></span>
-    <span><strong>Ticker: </strong><%= @stock.ticker %><span>
-    <span><strong>Last Price: </strong><%= "$#{@stock.last_price}" %></span>
+  <div class="well stock-search-results" style="background-color:rgb(255, 254, 244)">
+    <span style="margin-right: 20px"><strong>Name: </strong><%= @stock.name %></span>
+    <span style="margin-right: 20px"><strong>Ticker: </strong><%= @stock.ticker %></span>
+    <span style="margin-right: 20px"><strong>Last Price: </strong><%= "$#{@stock.last_price}" %></span>
+    <% if current_user.stocks.find_by(ticker: @stock.ticker).blank? && current_user.under_stock_limit?%>
+      <span><%= link_to "Add Stock", 
+        user_stocks_path(user: current_user, ticker: @stock.ticker), 
+        method: :post, 
+        class: "btn btn-xs btn-warning align-right"
+      %></span>
+    <% end %>
   </div>
 <% end %>

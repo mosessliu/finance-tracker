@@ -1,0 +1,19 @@
+<h1>My Portfolio (<%= current_user.stocks.count %>/9)</h1>
+<div>
+  <% if params[:controller] == "user_stocks" %>
+    <%= bootstrap_flash %>
+  <% end %>
+</div>
+<% i = 0 %>
+  <% while i < current_user.stocks.count%>
+    <div class="row col-md-12" style="margin-top:15px">
+      <% stock1 = current_user.stocks[i]%>
+      <% stock2 = current_user.stocks[i + 1]%>
+      <% stock3 = current_user.stocks[i + 2]%>
+      
+      <%= render 'users/stock', stock: stock1 %>
+      <%= render 'users/stock', stock: stock2 if stock2.present?%>
+      <%= render 'users/stock', stock: stock3 if stock3.present?%>
+    </div>
+  <% i += 3 %>
+<% end %> 
