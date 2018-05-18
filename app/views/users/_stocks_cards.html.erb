@@ -1,4 +1,8 @@
 <h1>My Portfolio (<%= current_user.stocks.count %>/9)</h1>
+<h5><%= link_to "Change to Table View", 
+      my_portfolio_change_display_style_path(display_style: "table"), 
+      remote: true 
+%></h5>
 <div>
   <% if params[:controller] == "user_stocks" %>
     <%= bootstrap_flash %>

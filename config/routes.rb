@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   get 'my_portfolio', to: 'users#my_portfolio'
   get 'search_stocks', to: 'stocks#search'
   resources :user_stocks, only: [:create, :destroy]
+  get 'my_portfolio/change_display_style', to: 'user_stocks#change_portfolio_display_style'
 
 end

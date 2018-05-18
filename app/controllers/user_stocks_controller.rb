@@ -13,10 +13,25 @@ class UserStocksController < ApplicationController
   end
 
   def destroy
+    stock = Stock.find(params[:id])
     UserStock.find_by(user_id: current_user.id, stock_id: params[:id]).destroy
-    respond_to do |format|  
-      flash.now[:danger] = "You have successfully removed #{@ticker} to your portfolio."
-      format.js {render partial: 'users/stocks_index.js'}
+    flash.now[:danger] = "You have successfully removed #{stock.ticker} from your portfolio."
+    respond_to do |format|
+      if params[:display_style] == 'cards'
+        format.js {render partial: 'users/stocks_cards.js'}
+      elsif params[:display_style] == 'table'
+        format.js {render partial: 'users/stocks_table.js'}
+      end
+    end
+  end
+
+  def change_portfolio_display_style
+    respond_to do |format|
+      if params[:display_style] == 'cards'
+        format.js {render partial: 'users/stocks_cards.js'}
+      elsif params[:display_style] == 'table'
+        format.js {render partial: 'users/stocks_table.js'}
+      end
     end
   end
 
@@ -31,5 +46,13 @@ class UserStocksController < ApplicationController
         stock = Stock.get_stock_from_ticker(@ticker)
     end
     return stock
+  end
+
+  def respond_with_cards_or_table(format)
+    if params[:display_style] == 'cards'
+      format.js {render partial: 'users/stocks_cards.js'}
+    elsif params[:display_style] == 'table'
+      format.js {render partial: 'users/stocks_table.js'}
+    end
   end
 end

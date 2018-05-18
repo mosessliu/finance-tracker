@@ -15,5 +15,9 @@
   </div>
 </div>
 <div id="stocks-index">
-  <%= render 'users/stocks_index.html'%>
+  <% if params[:display_style] == "cards" %>
+    <%= render 'users/stocks_cards.html'%>
+  <% elsif params[:display_style] == "table" %>
+    <%= render 'users/stocks_table.html'%>
+  <% end %>
 </div>

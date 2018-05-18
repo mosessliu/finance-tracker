@@ -11,7 +11,7 @@
     </div>
     <div align="center", style="margin:15px">
       <%= link_to "Untrack Stock", 
-        user_stock_path(stock), 
+        user_stock_path(stock, display_style: params[:display_style]), 
         method: :delete, 
         remote: true,
         data: {confirm: "Are you sure you want to stop tracking #{stock.ticker}?"},
