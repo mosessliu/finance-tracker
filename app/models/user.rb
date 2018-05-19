@@ -12,4 +12,17 @@ class User < ApplicationRecord
     return stocks.count < 9;
   end
 
+  def full_name
+    if has_name
+      return "#{first_name} #{last_name}" 
+    else
+      return nil
+    end
+  end
+
+  private 
+  def has_name
+    return first_name || last_name
+  end
+
 end

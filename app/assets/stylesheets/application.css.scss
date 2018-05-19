@@ -13,6 +13,7 @@
  *= require devise_bootstrap_views
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
  .stock-search-results {
    font-size: 1.2em;
@@ -44,4 +45,25 @@
   color: darkslategray;
   font-size: 1.3em;
   margin: 5px;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.left-padding {
+  padding-left: 15px;
+}
+.user-name {
+  padding-top: 15px;
+  color: darkslategray;
+  font-weight: 500;
+}
+
+.nav.navbar-right li {
+  .btn {
+    margin: 10px;
+    color: white;
+    padding: 5px;
+  }
 }

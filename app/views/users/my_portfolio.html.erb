@@ -2,11 +2,13 @@
 <div class="stock-lookup well col-md-12" style="padding-bottom: 2px">
   <%= form_with url: search_stocks_path, id:"stock-lookup", method: :get, remote: true do |f| %>
     <div class="form-group row no-padding text-center">
-      <div class="col-md-10">
+      <div class="col-md-11">
         <%= f.text_field :ticker, class: "form-control search-box input-lg", placeholder: "Stock ticker symbol", autofocus: true %>
       </div>
-      <div class="col-md-2">
-        <%= f.submit "Search", class: "btn btn-lg btn-success" %>
+      <div class="col-md-1">
+        <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+          <i class="fa fa-search"></i>
+        <% end %>
       </div>
     </div>
   <% end %>
