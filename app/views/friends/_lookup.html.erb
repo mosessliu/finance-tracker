@@ -1,0 +1,14 @@
+<div class="well col-md-12" style="padding-bottom: 2px">
+  <%= form_with url: search_friends_path, method: :get, remote: true do |f| %>
+    <div class="form-group row no-padding text-center">
+      <div class="col-md-11">
+        <%= f.text_field :friend_name, class: "form-control search-box input-lg", placeholder: "Name", autofocus: true %>
+      </div>
+      <div class="col-md-1">
+        <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+          <i class="fa fa-search"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

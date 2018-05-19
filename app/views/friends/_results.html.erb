@@ -1,0 +1,9 @@
+<% if params[:controller] == "friends" %>
+  <%= bootstrap_flash %>
+<% end %>
+
+<% if @search_results%>
+  <% for result in @search_results%>
+    </h1><%= result.full_name %></h1>
+  <% end %>
+<% end %>
