@@ -23,6 +23,14 @@
           user_path(user), 
           class: "btn btn-md btn-info"%>
       </div> 
+      <div align="center", style="margin-bottom:15px">
+        <%= link_to "Unfriend", 
+          friend_path(user), 
+          method: :delete,
+          remote: true,
+          data: {confirm: "Are you sure you want to unfriend #{user.full_name}?"},
+          class: "btn btn-md btn-danger"%>
+      </div>
     <% end %>
   </div>
 </div>

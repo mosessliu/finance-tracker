@@ -1,4 +1,4 @@
-<h2>My Portfolio (<%=current_user.stocks.count%>/9)</h2>
+<h2><%= user.id == current_user.id ? "My" : "#{user.full_name}'s"%> Portfolio (<%=user.stocks.count%>/9)</h2>
 <h5><%= link_to "Change to Table View", 
       my_portfolio_change_display_style_path(display_style: 'cards', user: user), 
       remote: true 

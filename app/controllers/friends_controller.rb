@@ -22,7 +22,7 @@ class FriendsController < ApplicationController
         flash.now[:warning] = "There are no users named #{name_array.join(" ")}."
       end
     end
-    
+
     respond_to do |format|
       format.js {render partial: 'friends/results.js'}
     end
@@ -46,6 +46,13 @@ class FriendsController < ApplicationController
   end
 
   def destroy
+    friend = User.find(params[:id])
+    friendship = Friendship.where(user_id: current_user.id, friend_id: friend.id).first
+    friendship.delete
+
+    respond_to do |format| 
+      format.js {render partial: 'shared/users_grid.js'}
+    end
   end
 
   private 
