@@ -1,0 +1,21 @@
+<% if params[:controller] == "friends" %>
+  <%= bootstrap_flash %>
+<% end %>
+
+<div>
+  <% if users%>
+    <% i = 0 %>
+    <% while i < users.count%>
+      <div class="row col-md-12" style="margin-top:15px">
+        <% user1 = users[i]%>
+        <% user2 = users[i + 1]%>
+        <% user3 = users[i + 2]%>
+      
+        <%= render 'shared/user', user: user1 %>
+        <%= render 'shared/user', user: user2 if user2.present?%>
+        <%= render 'shared/user', user: user3 if user3.present?%>
+      </div>
+      <% i += 3 %>
+    <% end %>
+  <% end %>
+</div>

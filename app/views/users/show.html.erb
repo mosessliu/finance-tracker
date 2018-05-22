@@ -1,0 +1,8 @@
+<div class="col-md-12">
+  <div align="center">
+    <%= image_tag @user.gravatar_url, :class => "circular-image" if @user%>
+  </div>
+  <div id="stocks-index">
+    <%= render 'shared/stocks_table.html', user: @user if @user%>
+  </div>
+</div>

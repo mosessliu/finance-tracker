@@ -6,6 +6,7 @@
         <%= f.text_field :ticker, class: "form-control search-box input-lg", placeholder: "Stock ticker symbol", autofocus: true %>
       </div>
       <div class="col-md-1">
+        <%= hidden_field_tag "display_style", params[:display_style]%>
         <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
           <i class="fa fa-search"></i>
         <% end %>
@@ -13,13 +14,13 @@
     </div>
   <% end %>
   <div id = "results">
-    <%= render 'users/result' %>
+    <%= render 'users/result', display_style: params[:display_style] %>
   </div>
 </div>
 <div id="stocks-index">
   <% if params[:display_style] == "cards" %>
-    <%= render 'users/stocks_cards.html'%>
+    <%= render 'shared/stocks_cards.html', user: current_user%>
   <% elsif params[:display_style] == "table" %>
-    <%= render 'users/stocks_table.html'%>
+    <%= render 'shared/stocks_table.html', user: current_user%>
   <% end %>
 </div>

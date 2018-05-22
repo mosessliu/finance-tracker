@@ -1,0 +1,28 @@
+<div class="col-md-4">
+  <div class="thumbnail">
+    <div class="circular-image" align="center" style="margin: 10px">
+      <%= image_tag user.gravatar_url, :class => "circular-image" %>
+    </div>
+    <div class="stock-name">
+      <i class="fa fa-user"></i> <%= user.full_name %>
+    </div>
+    <div class="stock-price">
+      <%= pluralize(user.friends.count, "friend") %>
+    </div>
+    <% if params[:controller] == "friends" and !current_user.friends.include? user%>
+      <div align="center", style="margin-bottom:15px">
+        <%= link_to "Add Friend", 
+          friends_path(friend_id: user.id), 
+          method: :post,
+          class: "btn btn-md btn-success",
+          remote: true %>
+      </div> 
+    <% else %>
+      <div align="center", style="margin-bottom:15px">
+        <%= link_to "View Portfolio", 
+          user_path(user), 
+          class: "btn btn-md btn-info"%>
+      </div> 
+    <% end %>
+  </div>
+</div>

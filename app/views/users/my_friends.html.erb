@@ -1,6 +1,11 @@
+<h3>My Friends (<%= current_user.friends.count%>) 
+  <%= link_to "Search for a friend", search_friends_query_path, class: "btn btn-md btn-success align-right" %>
+</h3>
+
+
 <div>
-  <%= render 'friends/lookup' %>
+  <%= render 'shared/users_grid', users: current_user.friends%>
 </div>
-<div id="friend-results">
-  <%= render 'friends/results' %>
-</div>
+
+
+

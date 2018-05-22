@@ -1,0 +1,34 @@
+<h2><%=current_user == user ? "My" : "#{user.full_name}'s"%> Portfolio (<%=user.stocks.count%>/9)</h2>
+<h5><%= link_to "Change to Card View", 
+      my_portfolio_change_display_style_path(display_style: 'table', user: user), 
+      remote: true 
+%></h5>
+<div>
+  <% if params[:controller] == "user_stocks" %>
+    <%= bootstrap_flash %>
+  <% end %>
+</div>
+<table class="table table-striped">
+  <tr>
+    <th>Company</th>
+    <th>Ticker Symbol</th>
+    <th>Last Price</th>
+    <% if user.id == current_user.id %>
+      <th>Action</th>
+    <% end %>
+  </tr>
+  <% for stock in user.stocks %>
+    <tr>
+      <td><%= stock.name %></td>
+      <td><%= stock.ticker %></td>
+      <td>$<%= stock.last_price %></td>
+      <% if user.id == current_user.id %>
+        <td><%= link_to "Untrack", 
+          user_stock_path(stock, display_style: params[:display_style]), 
+          method: :delete, 
+          remote: true, 
+          class: "btn btn-xs btn-warning"%>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

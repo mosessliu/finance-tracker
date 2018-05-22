@@ -1,0 +1,18 @@
+<h2>My Portfolio (<%=current_user.stocks.count%>/9)</h2>
+<h5><%= link_to "Change to Table View", 
+      my_portfolio_change_display_style_path(display_style: 'cards', user: user), 
+      remote: true 
+%></h5>
+<% i = 0 %>
+  <% while i < user.stocks.count%>
+    <div class="row col-md-12" style="margin-top:15px">
+      <% stock1 = user.stocks[i]%>
+      <% stock2 = user.stocks[i + 1]%>
+      <% stock3 = user.stocks[i + 2]%>
+      
+      <%= render 'shared/stocks_card', stock: stock1, user: user %>
+      <%= render 'shared/stocks_card', stock: stock2, user: user if stock2.present?%>
+      <%= render 'shared/stocks_card', stock: stock3, user: user if stock3.present?%>
+    </div>
+  <% i += 3 %>
+<% end %> 

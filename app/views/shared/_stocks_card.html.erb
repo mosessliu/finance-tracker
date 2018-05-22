@@ -9,6 +9,7 @@
     <div class="stock-price">
       Last Price: $<%= stock.last_price %>
     </div>
+    <% if current_user.id == user.id %>
     <div align="center", style="margin:15px">
       <%= link_to "Untrack Stock", 
         user_stock_path(stock, display_style: params[:display_style]), 
@@ -17,5 +18,6 @@
         data: {confirm: "Are you sure you want to stop tracking #{stock.ticker}?"},
         class: "btn btn-md btn-danger"%>
     </div>
+    <% end %>
   </div>
 </div>

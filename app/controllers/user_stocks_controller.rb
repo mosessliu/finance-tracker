@@ -1,14 +1,24 @@
 class UserStocksController < ApplicationController 
 
+  before_action :set_current_user_as_user_var, only: [:create, :destroy]
+
   def create
-    user = User.find(params[:user])
     @ticker = params[:ticker]
+    @user = current_user
+
     # don't let user add stock if already has in portfolio
-    if user_does_not_track_stock? && user.under_stock_limit?
+    if user_does_not_track_stock? && current_user.under_stock_limit?
       stock = get_stock_from_ticker
-      UserStock.create(user: user, stock: stock)
-      flash[:success] = "You have successfully added #{@ticker} to your portfolio."
-      redirect_to my_portfolio_path
+      UserStock.create(user: current_user, stock: stock)
+      flash.now[:success] = "You have successfully added #{@ticker} to your portfolio."
+
+      respond_to do |format|
+        if params[:display_style] == 'cards'
+          format.js {render partial: 'shared/stocks_cards.js'}
+        elsif params[:display_style] == 'table'
+          format.js {render partial: 'shared/stocks_table.js'}
+        end
+      end
     end
   end
 
@@ -18,19 +28,25 @@ class UserStocksController < ApplicationController
     flash.now[:danger] = "You have successfully removed #{stock.ticker} from your portfolio."
     respond_to do |format|
       if params[:display_style] == 'cards'
-        format.js {render partial: 'users/stocks_cards.js'}
+        format.js {render partial: 'shared/stocks_cards.js'}
       elsif params[:display_style] == 'table'
-        format.js {render partial: 'users/stocks_table.js'}
+        format.js {render partial: 'shared/stocks_table.js'}
       end
     end
   end
 
   def change_portfolio_display_style
+    # here, the user might not be the current user
+    @user = User.find(params[:user])
     respond_to do |format|
-      if params[:display_style] == 'cards'
-        format.js {render partial: 'users/stocks_cards.js'}
-      elsif params[:display_style] == 'table'
-        format.js {render partial: 'users/stocks_table.js'}
+      if params[:display_style] == 'table'
+        puts "cards"
+        params[:display_style] = 'cards'
+        format.js {render partial: 'shared/stocks_cards.js'}
+      elsif params[:display_style] == 'cards'
+        puts "table"
+        params[:display_style] == 'table'
+        format.js {render partial: 'shared/stocks_table.js'}
       end
     end
   end
@@ -55,4 +71,9 @@ class UserStocksController < ApplicationController
       format.js {render partial: 'users/stocks_table.js'}
     end
   end
+
+  def set_current_user_as_user_var
+    @user = current_user
+  end
+
 end

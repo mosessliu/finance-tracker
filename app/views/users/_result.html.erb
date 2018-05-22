@@ -9,11 +9,17 @@
     <span style="margin-right: 20px"><strong>Ticker: </strong><%= @stock.ticker %></span>
     <span style="margin-right: 20px"><strong>Last Price: </strong><%= "$#{@stock.last_price}" %></span>
     <% if current_user.stocks.find_by(ticker: @stock.ticker).blank? && current_user.under_stock_limit?%>
-      <span><%= link_to "Add Stock", 
-        user_stocks_path(user: current_user, ticker: @stock.ticker), 
-        method: :post, 
-        class: "btn btn-xs btn-warning align-right"
-      %></span>
+      <span>
+        <%= link_to "Add Stock",
+            user_stocks_path(
+            user: current_user, 
+            ticker: @stock.ticker, 
+            display_style: display_style),
+          method: :post,
+          remote: true,
+          class: "btn btn-xs btn-warning align-right"
+        %>
+      </span>
     <% end %>
   </div>
 <% end %>
