@@ -7,7 +7,7 @@
       (<%= stock.ticker %>)
     </div>
     <div class="stock-price">
-      Last Price: $<%= stock.last_price %>
+      Last Price: $<%= stock.updated_last_price %>
     </div>
     <% if current_user.id == user.id %>
     <div align="center", style="margin:15px">

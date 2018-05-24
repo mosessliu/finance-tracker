@@ -9,4 +9,9 @@ class Stock < ApplicationRecord
       return new(ticker: ticker, name: hash.company_name, last_price: hash.latest_price)
     end
   end
+
+  #method assumes that stock already exists
+  def updated_last_price
+    return StockQuote::Stock.quote(self.ticker).latest_price
+  end
 end
